@@ -75,7 +75,7 @@ You can run tests using the following command:
 ./mvnw test
 ```
 
-##For access to the admin panel, use the following credentials:
+## For access to the admin panel, use the following credentials:
 
 Email: admin@example.com
 Password: 123

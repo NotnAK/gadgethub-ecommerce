@@ -7,7 +7,7 @@ import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.entity.Role;
 import com.example.ecommerce.exception.DuplicateResourceException;
 import com.example.ecommerce.exception.ResourceNotFoundException;
-import com.example.ecommerce.mapper.CustomerInfoMapperImpl;
+import com.example.ecommerce.mapper.CustomerInfoMapper;
 import com.example.ecommerce.mapper.CustomerMapper;
 import com.example.ecommerce.repository.CustomerRepository;
 import com.example.ecommerce.service.CartService;
@@ -42,7 +42,7 @@ public class CustomerServiceTest {
     private CartService cartService;
 
     @Mock
-    private CustomerInfoMapperImpl customerInfoMapper;
+    private CustomerInfoMapper customerInfoMapper;
 
     @InjectMocks
     private CustomerService customerService;

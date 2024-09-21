@@ -1,6 +1,7 @@
 package com.example.ecommerce;
 
 import com.example.ecommerce.dto.CustomerDTO;
+import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.entity.Role;
 import com.example.ecommerce.service.CustomerService;
 import jakarta.servlet.ServletException;
@@ -16,11 +17,13 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 @Component
 public class AuthHandler implements AuthenticationSuccessHandler {
     @Autowired
     private CustomerService customerService;
+
     /**
      * Handles successful authentication.
      * If the user is authenticated via OAuth2 (Google), it checks if the user exists in the system.
@@ -43,18 +46,21 @@ public class AuthHandler implements AuthenticationSuccessHandler {
             Map<String, Object> attributes = user.getAttributes();
             String email = (String) attributes.get("email");
             String name = (String) attributes.get("name");
+            Optional<Customer> customer = customerService.findCustomerByEmailOptional(email);
             // Check if the user exists in the database
-            if (!customerService.userExists(email)) {
+            if (customer.isEmpty()) {
                 CustomerDTO newCustomer = new CustomerDTO();
                 newCustomer.setEmail(email);
                 newCustomer.setFullName(name);
                 newCustomer.setRole(Role.USER);
                 customerService.createCustomer(newCustomer);
             }
-            else{
+            // If the user exists, but was not created via Google (password is set)
+            else if(customer.isPresent() && customer.get().getPassword() != null){
                 response.sendRedirect("/login?error=User already exists"); //wanted to add a message that this user already exists
                 return;
             }
+            //else: if the user exists, but was created via Google (password is not set)
         }
 
         // Role-based redirection

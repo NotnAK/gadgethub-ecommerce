@@ -32,6 +32,17 @@ public class CustomerService {
         this.cartService = cartService;
         this.customerInfoMapper = customerInfoMapper;
     }
+
+    /**
+     * Finds a customer by their email address and returns an Optional containing the customer entity.
+     *
+     * @param email the email address of the customer to find
+     * @return an Optional containing the found customer entity, or an empty Optional if no customer is found
+     */
+    public Optional<Customer> findCustomerByEmailOptional(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
     /**
      * Retrieves a customer by their ID.
      *

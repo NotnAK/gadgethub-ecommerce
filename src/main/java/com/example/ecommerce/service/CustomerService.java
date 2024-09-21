@@ -6,7 +6,7 @@ import com.example.ecommerce.dto.CustomerInfoDTO;
 import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.exception.DuplicateResourceException;
 import com.example.ecommerce.exception.ResourceNotFoundException;
-import com.example.ecommerce.mapper.CustomerInfoMapperImpl;
+import com.example.ecommerce.mapper.CustomerInfoMapper;
 import com.example.ecommerce.mapper.CustomerMapper;
 import com.example.ecommerce.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,11 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
     private final CartService cartService;
-    private final CustomerInfoMapperImpl customerInfoMapper;
+    private final CustomerInfoMapper customerInfoMapper;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper,
-                           CartService cartService, CustomerInfoMapperImpl customerInfoMapper) {
+                           CartService cartService, CustomerInfoMapper customerInfoMapper) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
         this.cartService = cartService;

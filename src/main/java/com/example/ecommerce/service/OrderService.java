@@ -3,7 +3,7 @@ package com.example.ecommerce.service;
 import com.example.ecommerce.dto.*;
 import com.example.ecommerce.entity.*;
 import com.example.ecommerce.exception.ResourceNotFoundException;
-import com.example.ecommerce.mapper.OrderInfoMapperImpl;
+import com.example.ecommerce.mapper.OrderInfoMapper;
 import com.example.ecommerce.mapper.OrderItemMapper;
 import com.example.ecommerce.mapper.OrderMapper;
 import com.example.ecommerce.repository.*;
@@ -28,13 +28,13 @@ public class OrderService {
     private final CartService cartService;
     private final CartRepository cartRepository;
     private final ProductService productService;
-    private final OrderInfoMapperImpl orderInfoMapperImpl;
+    private final OrderInfoMapper orderInfoMapperImpl;
 
 
     @Autowired
     public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository,
                         ProductRepository productRepository, CustomerRepository customerRepository,
-                        OrderMapper orderMapper, OrderItemMapper orderItemMapper, CartService cartService, CartRepository cartRepository, ProductService productService, OrderInfoMapperImpl orderInfoMapperImpl) {
+                        OrderMapper orderMapper, OrderItemMapper orderItemMapper, CartService cartService, CartRepository cartRepository, ProductService productService, OrderInfoMapper orderInfoMapperImpl) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.productRepository = productRepository;

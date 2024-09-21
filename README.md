@@ -74,3 +74,11 @@ You can run tests using the following command:
 ```bash
 ./mvnw test
 ```
+
+
+## Database Structure
+
+Below is the database structure and relationships diagram for the project:
+
+![Database Diagram](https://github.com/user-attachments/assets/a6b7b0e5-1367-420f-8543-14d34c86a639)
+

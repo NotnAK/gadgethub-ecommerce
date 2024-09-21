@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<!-- header -->
+<div id="header"></div>
+
+<!-- Banner -->
+<div class="container-fluid py-5" style="background-color: #f1f3f5;">
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+            <img src="/images/sony-headphones.png" class="img-fluid" alt="Laptop Image">
+        </div>
+        <div class="col-md-4 text-center">
+            <h3 class="mt-4">Discover the Latest in Tech!</h3>
+            <a href="/products" class="btn btn-danger mt-3">SHOP NOW</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="/images/zephyrus-m.png" class="img-fluid" alt="Laptop Image">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="info-box">
+                <i class="fas fa-truck"></i>
+                <h5>Free Delivery</h5>
+                <p>Orders from all items</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <i class="fas fa-dollar-sign"></i>
+                <h5>Return & Refund</h5>
+                <p>Money back guarantee</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <i class="fas fa-percent"></i>
+                <h5>Member Discount</h5>
+                <p>On order over $99</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <i class="fas fa-headset"></i>
+                <h5>Support 24/7</h5>
+                <p>Contact us 24 hours a day</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products -->
+<main class="container mt-4">
+    <h1 class="text-center">Trending Products</h1>
+
+    <div class="row" id="product-list">
+        <!-- Products will be dynamically uploaded here -->
+    </div>
+</main>
+
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 GadgetHub. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+<script src="/js/productUtils.js"></script>
+<script src="/js/cartUtils.js"></script>
+<script src="/js/loadHeader.js"></script>
+<script src="/js/homePage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>

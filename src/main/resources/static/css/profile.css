@@ -1,0 +1,26 @@
+/* Styles for profile.html */
+#customer-info p {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0.5rem 0;
+}
+
+#customer-info strong {
+    color: #7a7a7a;
+    font-weight: bold;
+}
+
+#profile-content {
+    margin-left: 2rem;
+}
+
+/* Styles for card-title */
+.card-title {
+    background-color: #2c2c2c; /* Dark background */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding for spacing */
+    border-radius: 5px; /* Rounded corners */
+    text-align: center; /* Centered text */
+    font-weight: bold; /* Bold font */
+    font-size: 1.2rem; /* Text size */
+}

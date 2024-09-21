@@ -1,0 +1,45 @@
+.navbar {
+    margin-bottom: 20px;
+}
+
+#logout {
+    margin-left: 30%;
+    width: 40%;
+}
+
+#list-image {
+    width: auto; /* Automatic width */
+    max-height: 100px; /* Limit maximum height */
+    object-fit: contain; /* The image will scale proportionally and fully fit within the container */
+    display: block; /* Block element to avoid possible issues with the container */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+.list-item-image img {
+    width: 100px; /* Fixed image width */
+    height: auto; /* Automatic image height to maintain proportions */
+    object-fit: cover; /* Crop the image if it's too large */
+}
+
+.delete-product,
+.edit-product {
+    margin-top: 10%;
+}
+
+#admin-content {
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+}
+
+.table-danger {
+    background-color: #f8d7da; /* Red shade */
+    color: #721c24; /* Dark red text */
+}
+
+.product-image {
+    max-height: 500px;
+    object-fit: contain; /* The image scales while keeping proportions */
+    width: auto;
+}

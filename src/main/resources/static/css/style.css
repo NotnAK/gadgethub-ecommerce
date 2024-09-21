@@ -1,0 +1,182 @@
+/* Styles for product card */
+.product-card {
+    margin: 20px 0;
+    position: relative; /* Allows the button to be absolutely positioned within the card */
+    overflow: visible; /* Removes content clipping so the button can extend beyond the container */
+    transition: transform 0.3s ease; /* Smooth scaling effect when hovering over the card */
+}
+
+/* Hover effect to scale the product card */
+.product-card:hover {
+    transform: scale(0.97); /* Slightly scale the card when hovered */
+}
+
+/* Styles for the Add to Cart button */
+.add-to-cart {
+    background-color: #ff5454; /* Red background color for the button */
+    color: white; /* White text color */
+    border: none; /* No border */
+    width: 50%; /* Button occupies the left half of the card */
+    padding: 15px; /* Padding inside the button */
+    font-size: 1rem; /* Font size for the button text */
+    font-weight: bold; /* Bold text */
+    position: absolute; /* Absolute positioning relative to the card */
+    bottom: -40px; /* Initial position below the card (popping up) */
+    left: 0; /* Aligned to the left edge */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(-25%); /* Shift the button even further up */
+    transition: all 0.5s ease; /* Smooth animation for all changes */
+    pointer-events: none; /* Disable clicks until visible */
+}
+
+/* Styles for the View Details button */
+.view-details {
+    background-color: #6969ff; /* Blue background color for the button */
+    color: white; /* White text color */
+    border: none; /* No border */
+    width: 50%; /* Button occupies the right half of the card */
+    padding: 15px; /* Padding inside the button */
+    font-size: 1rem; /* Font size for the button text */
+    font-weight: bold; /* Bold text */
+    position: absolute; /* Absolute positioning relative to the card */
+    bottom: -40px; /* Initial position below the card (popping up) */
+    left: 50%; /* Aligned to the right half */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(-25%); /* Shift the button even further up */
+    transition: all 0.5s ease; /* Smooth animation for all changes */
+    pointer-events: none; /* Disable clicks until visible */
+}
+
+/* Buttons "pop up" when hovering over the card */
+.product-card:hover .add-to-cart,
+.product-card:hover .view-details {
+    opacity: 1; /* Buttons become visible */
+    transform: translateY(0); /* Buttons return to their normal position */
+    pointer-events: auto; /* Enable clicks when buttons are fully visible */
+}
+.add-to-cart:hover {
+    background-color: #ff0000; /* Darker red color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.view-details:hover {
+    background-color: #0000ff; /* Brighter blue color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Product image */
+.card-img-top {
+    height: 225px; /* Fixed image height */
+    object-fit: contain; /* Image scales while maintaining proportions */
+    margin-top: 15px; /* 15px margin at the top for the image */
+}
+
+/* Text inside the product card */
+.card-body {
+    text-align: center; /* Center-align text inside the card */
+}
+
+/* Styles for category and brand lists */
+#categories-list li,
+#brands-list li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#categories-list a,
+#brands-list a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding-bottom: 5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#categories-list a:hover,
+#brands-list a:hover {
+    color: red; /* Highlight in red on hover */
+}
+
+#categories-list a.selected,
+#brands-list a.selected {
+    color: red; /* Highlight in red if selected */
+}
+
+#categories-list a.selected::after,
+#brands-list a.selected::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: red; /* Red line under the selected item */
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+/* For smooth animation */
+#categories-list a::after,
+#brands-list a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: red;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+#categories-list a:hover::after,
+#brands-list a:hover::after {
+    width: 100%; /* Line appears on hover */
+}
+
+/* Info box */
+.info-box {
+    background-color: #cff6e4; /* Light background color */
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Buttons for pagination */
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* When the profile is aligned to the left */
+.left-aligned {
+    justify-content: flex-start;
+}
+
+/* Set background for the whole page */
+body {
+    background-color: #ffffff; /* Set background color */
+}
+/* Container for each cart item */
+.list-item {
+    display: flex;
+    align-items: center; /* Vertically align items to the center */
+    margin-top: 10px;
+}
+
+/* Product image */
+.list-item-image img {
+    width: 100px; /* Fixed image width */
+    height: auto; /* Automatic height to maintain proportions */
+    object-fit: cover; /* Crop the image if it's too large */
+}
+
+/* Product information */
+.list-item-info {
+    flex-grow: 1; /* This block will take up the remaining space */
+}
+
+.product-image {
+    max-height: 500px;
+    object-fit: contain; /* Image scales while maintaining proportions */
+    width: auto;
+}

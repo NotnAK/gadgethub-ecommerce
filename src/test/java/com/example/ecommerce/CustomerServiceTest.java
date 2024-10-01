@@ -7,7 +7,6 @@ import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.entity.Role;
 import com.example.ecommerce.exception.DuplicateResourceException;
 import com.example.ecommerce.exception.ResourceNotFoundException;
-import com.example.ecommerce.mapper.CustomerInfoMapper;
 import com.example.ecommerce.mapper.CustomerMapper;
 import com.example.ecommerce.repository.CustomerRepository;
 import com.example.ecommerce.service.CartService;
@@ -26,11 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CustomerServiceTest {
+ class CustomerServiceTest {
 
     @Mock
     private CustomerRepository customerRepository;
@@ -41,8 +41,6 @@ public class CustomerServiceTest {
     @Mock
     private CartService cartService;
 
-    @Mock
-    private CustomerInfoMapper customerInfoMapper;
 
     @InjectMocks
     private CustomerService customerService;
@@ -50,10 +48,9 @@ public class CustomerServiceTest {
     private Customer customer;
     private CustomerDTO customerDTO;
     private CustomerInfoDTO customerInfoDTO;
-    private CartDTO cartDTO;
 
     @BeforeEach
-    public void setUp() {
+     public void setUp() {
         customer = new Customer();
         customer.setId(1);
         customer.setEmail("test@example.com");
@@ -68,12 +65,10 @@ public class CustomerServiceTest {
         customerInfoDTO.setFullName("Test User");
         customerInfoDTO.setEmail("test@example.com");
 
-        cartDTO = new CartDTO();
-        cartDTO.setCustomerId(1);
     }
 
     @Test
-    public void testGetCustomerByIdSuccess() {
+     void testGetCustomerByIdSuccess() {
         when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
         when(customerMapper.toDTO(customer)).thenReturn(customerDTO);
 
@@ -85,7 +80,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testGetCustomerByIdThrowsException() {
+     void testGetCustomerByIdThrowsException() {
         when(customerRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> customerService.getCustomerById(1));
@@ -93,7 +88,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testCreateCustomerSuccess() {
+     void testCreateCustomerSuccess() {
         when(customerRepository.findByEmail("test@example.com")).thenReturn(Optional.empty());
         when(customerMapper.toEntity(customerDTO)).thenReturn(customer);
         when(customerRepository.save(customer)).thenReturn(customer);
@@ -107,7 +102,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testCreateCustomerThrowsDuplicateException() {
+     void testCreateCustomerThrowsDuplicateException() {
         when(customerRepository.findByEmail("test@example.com")).thenReturn(Optional.of(customer));
 
         assertThrows(DuplicateResourceException.class, () -> customerService.createCustomer(customerDTO));
@@ -115,7 +110,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testUpdateCustomerSuccess() {
+     void testUpdateCustomerSuccess() {
         when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
         when(customerRepository.findByEmail("test@example.com")).thenReturn(Optional.of(customer));
         when(customerRepository.save(customer)).thenReturn(customer);
@@ -128,7 +123,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testUpdateCustomerThrowsResourceNotFoundException() {
+     void testUpdateCustomerThrowsResourceNotFoundException() {
         when(customerRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> customerService.updateCustomer(1, customerInfoDTO));
@@ -136,7 +131,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testDeleteCustomerSuccess() {
+     void testDeleteCustomerSuccess() {
         when(customerRepository.existsById(1)).thenReturn(true);
 
         customerService.deleteCustomer(1);
@@ -145,7 +140,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testDeleteCustomerThrowsException() {
+     void testDeleteCustomerThrowsException() {
         when(customerRepository.existsById(1)).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> customerService.deleteCustomer(1));
@@ -153,7 +148,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testGetAllCustomersSuccess() {
+     void testGetAllCustomersSuccess() {
         List<Customer> customers = new ArrayList<>();
         customers.add(customer);
         Page<Customer> page = new PageImpl<>(customers);
@@ -168,7 +163,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testFindByEmailSuccess() {
+     void testFindByEmailSuccess() {
         when(customerRepository.findByEmail("test@example.com")).thenReturn(Optional.of(customer));
         when(customerMapper.toDTO(customer)).thenReturn(customerDTO);
 
@@ -179,7 +174,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void testFindByEmailThrowsException() {
+     void testFindByEmailThrowsException() {
         when(customerRepository.findByEmail("test@example.com")).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> customerService.findByEmail("test@example.com"));

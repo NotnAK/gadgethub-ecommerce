@@ -19,11 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class BrandServiceTest {
+class BrandServiceTest {
 
     @Mock
     private BrandRepository brandRepository;
@@ -52,7 +53,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testGetBrandByIdSuccess() {
+    void testGetBrandByIdSuccess() {
         when(brandRepository.findById(1)).thenReturn(Optional.of(brand));
         when(brandMapper.toDTO(brand)).thenReturn(brandDTO);
 
@@ -65,7 +66,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testGetBrandByIdThrowsException() {
+    void testGetBrandByIdThrowsException() {
         when(brandRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> brandService.getBrandById(1));
@@ -73,7 +74,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testCreateBrand() {
+    void testCreateBrand() {
         when(brandMapper.toEntity(brandDTO)).thenReturn(brand);
         when(brandRepository.save(brand)).thenReturn(brand);
         when(brandMapper.toDTO(brand)).thenReturn(brandDTO);
@@ -85,7 +86,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testUpdateBrandSuccess() {
+    void testUpdateBrandSuccess() {
         when(brandRepository.existsById(1)).thenReturn(true);
         when(brandMapper.toEntity(brandDTO)).thenReturn(brand);
         when(brandRepository.save(brand)).thenReturn(brand);
@@ -99,7 +100,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testUpdateBrandThrowsException() {
+    void testUpdateBrandThrowsException() {
         when(brandRepository.existsById(1)).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> brandService.updateBrand(brandDTO));
@@ -107,7 +108,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testDeleteBrandSuccess() {
+    void testDeleteBrandSuccess() {
         when(brandRepository.findById(1)).thenReturn(Optional.of(brand));
 
         brandService.deleteBrand(1);
@@ -117,7 +118,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testDeleteBrandThrowsException() {
+    void testDeleteBrandThrowsException() {
         when(brandRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> brandService.deleteBrand(1));
@@ -125,7 +126,7 @@ public class BrandServiceTest {
     }
 
     @Test
-    public void testGetAllBrands() {
+    void testGetAllBrands() {
         List<Brand> brandList = new ArrayList<>();
         brandList.add(brand);
 

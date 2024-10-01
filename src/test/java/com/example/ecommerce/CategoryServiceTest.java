@@ -18,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CategoryServiceTest {
+ class CategoryServiceTest {
 
     @Mock
     private CategoryRepository categoryRepository;
@@ -40,7 +41,7 @@ public class CategoryServiceTest {
     private CategoryDTO categoryDTO;
 
     @BeforeEach
-    public void setUp() {
+     public void setUp() {
         category = new Category();
         category.setId(1);
         category.setName("Test Category");
@@ -51,7 +52,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testGetCategoryByIdSuccess() {
+     void testGetCategoryByIdSuccess() {
         when(categoryRepository.findById(1)).thenReturn(Optional.of(category));
         when(categoryMapper.toDTO(category)).thenReturn(categoryDTO);
 
@@ -64,7 +65,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testGetCategoryByIdThrowsException() {
+     void testGetCategoryByIdThrowsException() {
         when(categoryRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> categoryService.getCategoryById(1));
@@ -72,7 +73,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testCreateCategory() {
+     void testCreateCategory() {
         when(categoryMapper.toEntity(categoryDTO)).thenReturn(category);
         when(categoryRepository.save(category)).thenReturn(category);
         when(categoryMapper.toDTO(category)).thenReturn(categoryDTO);
@@ -84,7 +85,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testUpdateCategorySuccess() {
+     void testUpdateCategorySuccess() {
         when(categoryRepository.existsById(1)).thenReturn(true);
         when(categoryMapper.toEntity(categoryDTO)).thenReturn(category);
         when(categoryRepository.save(category)).thenReturn(category);
@@ -98,7 +99,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testUpdateCategoryThrowsException() {
+     void testUpdateCategoryThrowsException() {
         when(categoryRepository.existsById(1)).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> categoryService.updateCategory(categoryDTO));
@@ -106,7 +107,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testDeleteCategorySuccess() {
+     void testDeleteCategorySuccess() {
         when(categoryRepository.findById(1)).thenReturn(Optional.of(category));
 
         categoryService.deleteCategory(1);
@@ -116,7 +117,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testDeleteCategoryThrowsException() {
+     void testDeleteCategoryThrowsException() {
         when(categoryRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> categoryService.deleteCategory(1));
@@ -124,7 +125,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testGetAllCategories() {
+     void testGetAllCategories() {
         List<Category> categoryList = new ArrayList<>();
         categoryList.add(category);
 

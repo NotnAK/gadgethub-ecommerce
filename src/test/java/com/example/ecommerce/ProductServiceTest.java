@@ -6,8 +6,6 @@ import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.exception.ResourceNotFoundException;
 import com.example.ecommerce.mapper.ProductInfoMapper;
 import com.example.ecommerce.mapper.ProductMapper;
-import com.example.ecommerce.repository.BrandRepository;
-import com.example.ecommerce.repository.CategoryRepository;
 import com.example.ecommerce.repository.ProductRepository;
 import com.example.ecommerce.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,35 +17,26 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductServiceTest {
+ class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
-
-    @Mock
-    private BrandRepository brandRepository;
-
-    @Mock
-    private CategoryRepository categoryRepository;
 
     @Mock
     private ProductMapper productMapper;
 
     @Mock
     private ProductInfoMapper productInfoMapper;
-
-    @Mock
-    private MultipartFile multipartFile;
 
     @InjectMocks
     private ProductService productService;
@@ -57,7 +46,7 @@ public class ProductServiceTest {
     private ProductInfoDTO productInfoDTO;
 
     @BeforeEach
-    public void setUp() {
+     public void setUp() {
         product = new Product();
         product.setId(1);
         product.setName("Test Product");
@@ -74,7 +63,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testGetProductInfoByIdSuccess() {
+     void testGetProductInfoByIdSuccess() {
         when(productRepository.findById(1)).thenReturn(Optional.of(product));
         when(productInfoMapper.toDTO(product)).thenReturn(productInfoDTO);
 
@@ -86,7 +75,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testGetProductInfoByIdThrowsException() {
+     void testGetProductInfoByIdThrowsException() {
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> productService.getProductInfoById(1));
@@ -94,7 +83,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testCreateProduct() {
+     void testCreateProduct() {
         when(productMapper.toEntity(productDTO)).thenReturn(product);
         when(productRepository.save(product)).thenReturn(product);
         when(productMapper.toDTO(product)).thenReturn(productDTO);
@@ -106,7 +95,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testIncrementProductPopularitySuccess() {
+     void testIncrementProductPopularitySuccess() {
         when(productRepository.findById(1)).thenReturn(Optional.of(product));
         when(productRepository.save(product)).thenReturn(product);
 
@@ -117,14 +106,14 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testIncrementProductPopularityThrowsException() {
+     void testIncrementProductPopularityThrowsException() {
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> productService.incrementProductPopularity(1));
     }
 
     @Test
-    public void testUpdateProductSuccess() {
+     void testUpdateProductSuccess() {
         when(productRepository.findById(1)).thenReturn(Optional.of(product));
         when(productMapper.toEntity(productDTO)).thenReturn(product);
         when(productRepository.save(product)).thenReturn(product);
@@ -137,14 +126,14 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testUpdateProductThrowsException() {
+     void testUpdateProductThrowsException() {
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> productService.updateProduct(productDTO));
     }
 
     @Test
-    public void testDeleteProductSuccess() {
+     void testDeleteProductSuccess() {
         when(productRepository.findById(1)).thenReturn(Optional.of(product));
 
         productService.deleteProduct(1);
@@ -153,14 +142,14 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testDeleteProductThrowsException() {
+     void testDeleteProductThrowsException() {
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> productService.deleteProduct(1));
     }
 
     @Test
-    public void testGetAllActiveProducts() {
+     void testGetAllActiveProducts() {
         Page<Product> productPage = new PageImpl<>(Collections.singletonList(product));
         when(productRepository.findAllByIsActiveTrue(any(Pageable.class))).thenReturn(productPage);
         when(productInfoMapper.toDTO(product)).thenReturn(productInfoDTO);
@@ -172,7 +161,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testGetAllProducts() {
+     void testGetAllProducts() {
         Page<Product> productPage = new PageImpl<>(Collections.singletonList(product));
         when(productRepository.findAll(any(Pageable.class))).thenReturn(productPage);
         when(productInfoMapper.toDTO(product)).thenReturn(productInfoDTO);
@@ -184,7 +173,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testGetProductsByPopularity() {
+     void testGetProductsByPopularity() {
         when(productRepository.findAllByIsActiveTrueOrderByPopularityDesc(any(Pageable.class)))
                 .thenReturn(Collections.singletonList(product));
         when(productMapper.toDTO(product)).thenReturn(productDTO);

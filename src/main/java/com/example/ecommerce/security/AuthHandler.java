@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.ecommerce.security;
 
 import com.example.ecommerce.dto.CustomerDTO;
 import com.example.ecommerce.entity.Customer;

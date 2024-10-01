@@ -1,6 +1,5 @@
 package com.example.ecommerce;
 
-
 import com.example.ecommerce.dto.CartDTO;
 import com.example.ecommerce.dto.CartItemDTO;
 import com.example.ecommerce.entity.Cart;
@@ -27,11 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CartServiceTest {
+ class CartServiceTest {
 
     @Mock
     private CartRepository cartRepository;
@@ -59,11 +59,10 @@ public class CartServiceTest {
     private CartDTO cartDTO;
     private CartItemDTO cartItemDTO;
     private Product product;
-    private Customer customer;
 
     @BeforeEach
-    public void setUp() {
-        customer = new Customer();
+     public void setUp() {
+        Customer customer = new Customer();
         customer.setId(1);
 
 
@@ -102,7 +101,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testGetCartByIdSuccess() {
+     void testGetCartByIdSuccess() {
         when(cartRepository.findById(1)).thenReturn(Optional.of(cart));
         when(cartMapper.toDTO(cart)).thenReturn(cartDTO);
 
@@ -113,7 +112,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testGetCartByIdThrowsException() {
+     void testGetCartByIdThrowsException() {
         when(cartRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> cartService.getCartById(1));
@@ -121,7 +120,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testCreateCart() {
+     void testCreateCart() {
         when(customerRepository.existsById(1)).thenReturn(true);
         when(cartMapper.toEntity(cartDTO)).thenReturn(cart);
         when(cartRepository.save(cart)).thenReturn(cart);
@@ -135,7 +134,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testAddCartItemSuccess() {
+     void testAddCartItemSuccess() {
         when(productRepository.findById(1)).thenReturn(Optional.of(product));
         when(cartRepository.findById(1)).thenReturn(Optional.of(cart));
         when(cartItemMapper.toDTO(cartItem)).thenReturn(cartItemDTO);
@@ -150,7 +149,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testAddCartItemThrowsExceptionIfProductNotFound() {
+     void testAddCartItemThrowsExceptionIfProductNotFound() {
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> cartService.addCartItem(1, 1));
@@ -159,7 +158,7 @@ public class CartServiceTest {
 
 
     @Test
-    public void testUpdateCartItemQuantityThrowsExceptionIfCartItemNotFound() {
+     void testUpdateCartItemQuantityThrowsExceptionIfCartItemNotFound() {
         when(cartItemRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> cartService.updateCartItemQuantity(1, 2));
@@ -167,7 +166,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testDeleteCartItemSuccess() {
+     void testDeleteCartItemSuccess() {
         when(cartItemRepository.findById(1)).thenReturn(Optional.of(cartItem));
 
         cartService.deleteCartItem(1);
@@ -176,7 +175,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testDeleteCartItemThrowsException() {
+     void testDeleteCartItemThrowsException() {
         when(cartItemRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> cartService.deleteCartItem(1));
@@ -184,7 +183,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testClearCartSuccess() {
+     void testClearCartSuccess() {
         when(cartRepository.findById(1)).thenReturn(Optional.of(cart));
         when(cartItemRepository.findByCartId(1)).thenReturn(List.of(cartItem));
 
@@ -196,7 +195,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testGetCartItemsByCartIdSuccess() {
+     void testGetCartItemsByCartIdSuccess() {
         when(cartRepository.existsById(1)).thenReturn(true);
         when(cartItemRepository.findByCartId(1)).thenReturn(List.of(cartItem));
         when(cartItemMapper.toDTO(cartItem)).thenReturn(cartItemDTO);
@@ -209,7 +208,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testGetCartItemsByCartIdThrowsException() {
+     void testGetCartItemsByCartIdThrowsException() {
         when(cartRepository.existsById(1)).thenReturn(false);
 
         assertThrows(ResourceNotFoundException.class, () -> cartService.getCartItemsByCartId(1));
